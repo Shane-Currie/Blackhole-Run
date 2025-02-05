@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blackhole Run</title>
   <style>
+    
     /* === BASE STYLES === */
     body {
       margin: 0;
@@ -120,6 +121,9 @@
   </style>
 </head>
 <body>
+
+<!-- *****Section H1  - Code Reference Point – Start****** -->
+
   <div id="gameContainer">
     <canvas id="gameCanvas"></canvas>
     <div id="info"></div>
@@ -128,7 +132,11 @@
     <div id="fuelAlertMessage" class="alertMessageTop">Collecting Fuel from Black Hole.....</div>
     <div id="outOfFuelMessage" class="alertMessageBottom">OUT OF FUEL!</div>
   </div>
-  
+ 
+<!-- *****Section H1  - Code Reference Point – FINISH****** -->
+
+<!-- *****Section H2  - Code Reference Point – Start****** -->
+ 
   <div id="controls">
     <button id="propelButton">Propel</button>
     <button id="reverseButton">Reverse</button>
@@ -137,7 +145,12 @@
     <button id="startPauseButton">Pause</button>
   </div>
 
+<!-- *****Section H2  - Code Reference Point – FINISH****** -->
+
   <script>
+  
+  // *****Section J1  - Code Reference Point – Start******
+  
     // === SHIP IMAGE HANDLING ===
     const shipImage = new Image();
     let imageLoaded = false;
@@ -151,11 +164,19 @@
     };
     shipImage.src = './assets/images/playerShip.png';
 
+// *****Section J1  - Code Reference Point – Finish******
+
+// *****Section J2  - Code Reference Point – Start******
+
     // === STARFIELD CONFIG ===
     const STAR_COUNT = 100000;         // Adjust star density
     const STARFIELD_WIDTH = 25000;     // Adjust starfield width (px)
     const STARFIELD_HEIGHT = 900;      // Adjust starfield height (px)
     const PARALLAX_FACTOR = 0.2;       // Adjust movement speed (0-1)
+	
+// *****Section J2  - Code Reference Point – Finish******
+
+// *****Section J3  - Code Reference Point – Start******
 
     // === GAME INITIALIZATION ===
     const canvas = document.getElementById('gameCanvas');
@@ -164,6 +185,10 @@
     let height = window.innerHeight * 0.85;
     canvas.width = width;
     canvas.height = height;
+	
+// *****Section J3  - Code Reference Point – Finish******
+
+// *****Section J4  - Code Reference Point – Start******
 
     // === STARFIELD SETUP ===
     let stars = [];
@@ -175,6 +200,10 @@
       });
     }
 
+// *****Section J4  - Code Reference Point – Finish******
+
+// *****Section J5  - Code Reference Point – Start******
+
     // === WINDOW RESIZE HANDLER ===
     window.addEventListener('resize', () => {
       width = window.innerWidth;
@@ -183,6 +212,10 @@
       canvas.height = height;
     });
 
+// *****Section J5  - Code Reference Point – Finish******
+
+// *****Section J6 - Code Reference Point – Start******
+
     // === GAME OBJECTS ===
     // Gravitational constant (scaled for game physics)
     const G_scaled = 500; // EDIT: Increase for stronger gravity
@@ -190,6 +223,10 @@
     const c_scaled = 1000; // EDIT: Increase for larger black hole radius
 
     let highScore = 0;
+	
+// *****Section J6 - Code Reference Point – Finish******	
+
+// *****Section J7  - Code Reference Point – Start******
 
     // Black hole object with computed property
     let blackHole = {
@@ -202,6 +239,11 @@
         return (2 * G_scaled * this.mass) / (c_scaled * c_scaled);
       }
     };
+
+
+// *****Section J7  - Code Reference Point – Finish******
+
+// *****Section J8  - Code Reference Point – Start******
 
     // Blue planet object with gravitational pull calculation
     let bluePlanet = {
@@ -221,6 +263,10 @@
       }
     };
 
+// *****Section J8  - Code Reference Point – Finish******
+
+// *****Section J9  - Code Reference Point – Start******
+
     // Player ship object with physics properties
     let playerShip = {
       x: 1200,      // Starting x position (fixed)
@@ -229,9 +275,14 @@
       vy: 0,        // Velocity in y direction
       radius: 15,   // EDIT: Increase for larger ship collision area
       mass: 1,      // EDIT: Increase for heavier ship (affects movement)
-      fuel: 50,     // EDIT: Increase starting fuel
+      fuel: 5000,     // EDIT: Increase starting fuel
       fuelDeposited: 0
     };
+
+
+// *****Section J9  - Code Reference Point – Finish******
+
+// *****Section J10  - Code Reference Point – Start******
 
     // === GAME MECHANICS ===
     const fuelConsumptionRate = 20;  // EDIT: Increase for faster fuel usage
@@ -241,10 +292,18 @@
     const reverseStrength = 200;     // EDIT: Increase for stronger reverse thrust
     let isPropelling = false;
     let isReversing = false;
+	
+// *****Section J10  - Code Reference Point – Finish******	
+
+// *****Section J11  - Code Reference Point – Start******
 
     // Flag and timestamp to prevent random respawn immediately after reset
     let justReset = false;
     let resetTime = 0;
+	
+// *****Section J11  - Code Reference Point – Finish******	
+
+// *****Section J12  - Code Reference Point – Start******
 
     // === TOUCH AND MOUSE EVENT HANDLERS ===
     function setupButtonEvents(button, action) {
@@ -261,10 +320,18 @@
       button.addEventListener('touchcancel', () => action(false));
     }
 
+// *****Section J12  - Code Reference Point – Finish******
+
+// *****Section J13  - Code Reference Point – Start******
+
     // Setup button events for Propel and Reverse
     setupButtonEvents(document.getElementById('propelButton'), (state) => isPropelling = state);
     setupButtonEvents(document.getElementById('reverseButton'), (state) => isReversing = state);
     document.getElementById('resetButton').addEventListener('click', () => resetGame());
+	
+// *****Section J13 - Code Reference Point – Finish******
+
+// *****Section J14  - Code Reference Point – Start******
 
     // NEW: Start/Pause Button setup
     // The game will start in a running state.
@@ -276,9 +343,17 @@
       startPauseButton.textContent = gamePaused ? "Start" : "Pause";
     });
 
+// *****Section J14  - Code Reference Point – Finish******
+
+// *****Section J15  - Code Reference Point – Start******
+
     // === GAME FUNCTIONS ===
     let depositStartTime = null;
     const depositDelay = 2000; // EDIT: Increase for longer landing sequence
+
+// *****Section J15  - Code Reference Point – Finish******
+
+// *****Section J16  - Code Reference Point – Start******
 
     function resetGame() {
       // Reset player ship to a fixed starting position with zero velocity
@@ -301,6 +376,10 @@
       resetTime = performance.now();
     }
 
+// *****Section J16  - Code Reference Point – Finish******
+
+// *****Section J17  - Code Reference Point – Start******
+
     // Function to check collisions for game over events
     function checkCollisions() {
       // Calculate distance from ship to black hole using the Pythagorean theorem
@@ -312,6 +391,8 @@
         return;
       }
 
+// *****Section J17  - Code Reference Point – Finish******
+
       // Calculate distance from ship to blue planet
       const bpDist = Math.sqrt((bluePlanet.x - playerShip.x) ** 2 + (bluePlanet.y - playerShip.y) ** 2);
       const speed = Math.sqrt(playerShip.vx ** 2 + playerShip.vy ** 2);
@@ -321,6 +402,8 @@
         resetGame();
       }
     }
+	
+// *****Section J18  - Code Reference Point – Start******	
 
     function update(deltaTime) {
       const bhDist = Math.sqrt((blackHole.x - playerShip.x) ** 2 + (blackHole.y - playerShip.y) ** 2);
@@ -337,6 +420,10 @@
 
       checkCollisions();
 
+// *****Section J18  - Code Reference Point – Finish******
+
+// *****Section J19  - Code Reference Point – Start******
+
       // Black hole respawn:
       // Only trigger respawn if NOT just reset (to prevent random spawn on restart)
       if (!justReset && bhDist < blackHole.radius + playerShip.radius) {
@@ -352,6 +439,11 @@
       if (justReset && performance.now() - resetTime > 1000) {
         justReset = false;
       }
+
+
+// *****Section J19  - Code Reference Point – Finish******
+
+// *****Section J20  - Code Reference Point – Start******
 
       // Landing sequence at blue planet
       if (bpDist < bluePlanet.radius + playerShip.radius) {
@@ -371,8 +463,16 @@
         depositStartTime = null;
       }
 
+// *****Section J20  - Code Reference Point – Finish******
+
+// *****Section J21  - Code Reference Point – Start******
+
       // Display out-of-fuel alert if needed
       document.getElementById('outOfFuelMessage').style.display = playerShip.fuel <= 0 ? 'block' : 'none';
+
+// *****Section J21  - Code Reference Point – Finish******
+
+// *****Section J22  - Code Reference Point – Start******
 
       // Movement controls: Apply thrust if propelling or reversing
       if (isPropelling && playerShip.fuel > 0) {
@@ -403,6 +503,10 @@
                           (bluePlanet.y - playerShip.y) / bpDist * bpAccel) * deltaTime;
       }
 
+// *****Section J22  - Code Reference Point – Finish******
+
+// *****Section J23  - Code Reference Point – Start******
+
       // Update ship's position based on its velocity
       playerShip.x += playerShip.vx * deltaTime;
       playerShip.y += playerShip.vy * deltaTime;
@@ -417,6 +521,10 @@
         alertElement.style.display = 'none';
       }
     }
+
+// *****Section J23  - Code Reference Point – Finish******
+
+// *****Section J24  - Code Reference Point – Start******
 
     // === RENDERING ===
     function drawGrid() {
@@ -441,6 +549,10 @@
       ctx.stroke();
     }
 
+// *****Section J24  - Code Reference Point – Finish******
+
+// *****Section J25  - Code Reference Point – Start******
+
     function render() {
       // Clear canvas
       ctx.fillStyle = '#000';
@@ -457,23 +569,39 @@
       });
       ctx.restore();
 
+// *****Section J25  - Code Reference Point – Finish******
+
+// *****Section J26  - Code Reference Point – Start******
+
       // Draw game world relative to playerShip's position
       ctx.save();
       ctx.translate(width/2 - playerShip.x, height/2 - playerShip.y);
 
       drawGrid();
 
+// *****Section J26  - Code Reference Point – Finish******
+
+// *****Section J27  - Code Reference Point – Start******
+
       // Draw black hole (lighter shade)
       ctx.beginPath();
       ctx.arc(blackHole.x, blackHole.y, blackHole.radius, 0, Math.PI*2);
       ctx.fillStyle = '#222'; // Lighter black
       ctx.fill();
+	  
+// *****Section J27  - Code Reference Point – Finish******
+
+// *****Section J28  - Code Reference Point – Start******
 
       // Draw blue planet
       ctx.beginPath();
       ctx.arc(bluePlanet.x, bluePlanet.y, bluePlanet.radius, 0, Math.PI*2);
       ctx.fillStyle = 'blue';
       ctx.fill();
+	  
+// *****Section J28  - Code Reference Point – Finish******	  
+
+// *****Section J29  - Code Reference Point – Start******
 
       // Draw player ship or red dot
       if (imageLoaded) {
@@ -496,6 +624,10 @@
 
       ctx.restore();
 
+// *****Section J29  - Code Reference Point – Finish******
+
+// *****Section J30  - Code Reference Point – Start******
+
       // UI TEXT: Each piece of info on a new line using <br>
       document.getElementById('info').innerHTML =
         `Black Hole: ${Math.sqrt((blackHole.x - playerShip.x) ** 2 + (blackHole.y - playerShip.y) ** 2).toFixed(2)}px<br>` +
@@ -503,6 +635,10 @@
         `Fuel: ${playerShip.fuel.toFixed(2)}<br>` +
         `Speed: ${Math.sqrt(playerShip.vx ** 2 + playerShip.vy ** 2).toFixed(2)}px/s`;
     }
+
+// *****Section J30  - Code Reference Point – Finish******
+
+// *****Section J31  - Code Reference Point – Start******
 
     // === GAME LOOP ===
     let lastTime = performance.now();
@@ -518,8 +654,18 @@
       requestAnimationFrame(gameLoop);
     }
     requestAnimationFrame(gameLoop);
+	
+// *****Section J30  - Code Reference Point – Finish******
+	
   </script>
+  
+
+<!-- *****Section H3  - Code Reference Point – Start****** -->
+  
     <p>Beta Version 1.14 | Developer – Shane Currie | Contact: shane@shanesonline.com </p>
+	
+<!-- *****Section H3  - Code Reference Point – FINISH****** -->
+	
     <br>
 </body>
 </html>
