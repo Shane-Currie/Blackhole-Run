@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blackhole Run</title>
+  <style>
+#bottomBar {
+  width: 100%;
+  background-color: #001f3f;
+  color: white;
+  text-align: center;
+  padding: 10px 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.counterRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.counterRow span {
+  min-width: 120px;
+}
+
+.buttonRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+#topBar {
+  width: 100%;
+  background-color: #001f3f;
+  color: white;
+  text-align: center;
+  padding: 10px 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.topCounterRow {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 5px;
+}
+
+.topCounterRow span {
+  min-width: 140px;
+}
+
+.topAlertRow {
+  position: relative;
+}
+
+#alertMessage,
+.alertMessageTop,
+.alertMessageBottom {
+  position: relative;
+  font-size: 18px;
+  color: yellow;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 6px 15px;
+  border-radius: 4px;
+  display: none;
+  margin: 4px auto;
+}
+
+.alertMessageTop { color: #0f0; }
+.alertMessageBottom { color: #f00; }
+
+@media (max-width: 768px) {
+  .counterRow span {
+    font-size: 18px;
+    min-width: 100px;
+  }
+
+  .buttonRow button {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+
+  .topCounterRow span {
+    font-size: 16px;
+    min-width: 110px;
+  }
+
+  #topBar {
+    font-size: 14px;
+  }
+
+  #alertMessage,
+  .alertMessageTop,
+  .alertMessageBottom {
+    font-size: 16px;
+    padding: 6px 10px;
+  }
+}
+
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+#gameContainer {
+  position: relative;
+}
+
+canvas {
+  display: block;
+}
+
+#controls {
+  margin-top: 10px;
+  position: relative;
+  z-index: 2;
+}
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+  </style>
+</head>
+<body>
+
+<!-- *****Section H1  - Code Reference Point – Start****** -->
+<div id="gameContainer">
+  <canvas id="gameCanvas"></canvas>
+
+  <!-- NEW TOP UI -->
+  <div id="topBar">
+    <div class="topCounterRow">
+      <span id="scoreCounter">Score: 0</span>
+      <span id="blackHoleMass">Blackhole Mass: 0</span>
+    </div>
+    <div class="topAlertRow">
+      <div id="alertMessage">Slow down to 150px/s to land!</div>
+      <div id="fuelAlertMessage" class="alertMessageTop">Collecting Fuel from Black Hole.....</div>
+      <div id="outOfFuelMessage" class="alertMessageBottom">OUT OF FUEL!</div>
+    </div>
+  </div>
+</div>
+<!-- *****Section H1  - Code Reference Point – FINISH****** -->
+
+<div id="bottomBar">
+  <div class="counterRow">
+    <span id="bhDistance">Black Hole: 0px</span>
+    <span id="bpDistance">Blue Planet: 0px</span>
+    <span id="fuelLevel">Fuel: 0</span>
+    <span id="shipSpeed">Speed: 0px/s</span>
+  </div>
+  <div class="buttonRow">
+    <button id="propelButton">Left Thrust</button>
+    <button id="reverseButton">Right Thrust</button>
+    <button id="resetButton">Redeploy</button>
+    <button id="startPauseButton">Pause</button>
+  </div>
+</div>
+
+<p>BETA (not yet complete) Version 1.18.11 21/07/25 | Developer – Shane Currie | Contact: shanecurrie@live.com </p>
+
+<script src="game-v1.18.11.js" defer></script>
+</body>
+</html>
